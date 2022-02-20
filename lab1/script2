@@ -1,0 +1,41 @@
+#!/bin/bash
+
+clear
+errState="0"
+if [[ -z "$3" || -n "$4" ]]  #number of param-s
+then
+	errState="1"
+	echo "First parameter - output file" >&2
+	echo "Second parameter - extension (without a dot)" >&2
+	echo "Third parameter - searching directory" >&2
+fi
+
+if [[ "0" -eq "$errState" ]]		#no permissions for writing into a file
+then
+	touch "$1" > /dev/null
+	if [ "0" -ne "$?" ]
+	then
+		errState="1"
+		echo "Missing permissions for writing into specified file.." >&2
+	fi
+fi
+
+state=""
+if [[ "0" -eq "$errState" ]]		#missing directory
+then
+	ls "$3" > /dev/null 2> /dev/null
+	if [ "0" -ne "$?" ]
+	then
+		errState="1"
+		echo "No such file or directory.." >&2
+	fi
+fi
+
+if [[ "1" -eq "$errState" ]]
+then
+	echo "Aborted!" >&2
+else
+	find "$3" -name "*.$2"	| sort -i
+	find "$3" -name "*.$2" | sort -i > "$1"
+	echo "Done!"
+fi

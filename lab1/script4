@@ -1,0 +1,25 @@
+#!/bin/bash
+# $2 - path, $1 - string in quotes
+clear
+if [ "2" -eq "$#" ]     #number of params
+then
+    if [ -n "$1" ]      #null string
+    then
+        if [ -d "$2" ]      #incorrect path
+        then    #searching
+            res=$(find "$2" -type f -exec grep -l "^$1$" {} \;)
+            if [ -n "$res" ]
+            then
+                du -bh $(find "$2" -type f -exec grep -l "$1" {} \;) | sort -k1 | sed "s?$2?.?g"
+            fi
+            echo "Done"
+        else
+            echo -e "ERR: Incorrect path\nAborted" >&2
+        fi
+    else
+        echo -e "ERR: null string for searching\nAborted" >&2
+    fi
+else
+    echo -e "This script expect 2 parameters: \n    First - string in quotes \n    Second - directory for searching\nAborted" >&2
+fi
+

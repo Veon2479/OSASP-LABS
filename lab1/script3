@@ -1,0 +1,47 @@
+#!/bin/bash
+
+clear
+
+if [ "2" -ne "$#" ]	#parameters issues
+then
+	echo "First parameter - input file with extension .c, second - name of executable output file" >&2
+	echo "Aborted"
+
+else
+
+	if [ -r "$1" ]		#input file issues
+	then
+		touch "./$2"
+		if [ "0" -ne "$?" ]		#issues with output file
+		then
+			echo "There's no permissions to create output file" >&2
+			echo "Aborted"
+		else
+			rm "./$2"
+			gcc "$1" -o "$2" && "./$2"
+			if [ "0" -eq "$?" ]
+			then
+				echo -e "\nDone"
+			else
+				echo -e "\nAborted"
+			fi
+		fi
+
+	else
+		echo "There's no such file .c (or permissions to read it)" >&2
+		echo "Aborted"
+
+	fi
+
+fi
+
+
+
+#log=$(gcc "$1" -o "$2" && "./$2" )
+#state="$?"
+#if [ -n "$log" ]
+#then
+#	echo -e "$log"
+#fi
+
+#gcc "$1" -o "$2" && "./$2"
