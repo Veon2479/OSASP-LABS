@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/andmin/Workspace/Bash/OSASP-LABS/lab2/t1/build",
+  "command": "/usr/bin/cc -g -o CMakeFiles/t1.dir/main.c.o -c /home/andmin/Workspace/Bash/OSASP-LABS/lab2/t1/main.c",
+  "file": "/home/andmin/Workspace/Bash/OSASP-LABS/lab2/t1/main.c"
+}
+]

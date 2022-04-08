@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/andmin/projects/t6/build",
+  "command": "/usr/bin/cc -g -o CMakeFiles/t6.dir/main.c.o -c /home/andmin/projects/t6/main.c",
+  "file": "/home/andmin/projects/t6/main.c"
+}
+]
